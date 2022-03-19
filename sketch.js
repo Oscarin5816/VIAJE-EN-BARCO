@@ -1,22 +1,47 @@
-//C10 Actividad del alumno
+var sea,ship;
+var seaImg,shipImg;
 
-var s1,s2,s3,s4;
-var sprites =[]
+function preload(){
+  //descomentar el código para agregar la animación del barco 
 
-function setup() {
-  createCanvas(400, 400);
-  s1 = createSprite(75, 100, 30, 30);
-  s2 = createSprite(150, 250, 30, 30);
-  s3 = createSprite(300, 300, 30, 30);
-  s4 = createSprite(350, 150, 30, 30);
-  sprites =  [s1,s2,s3,s4]
-  console.log(sprites[2].position.x)
+  shipImg1 = loadAnimation("ship-1.png");
+  shipImg2 = loadAnimation("ship-2.png");
+  //shipImg1 = loadAnimation("ship-1");
+  shipImg1 = loadAnimation("ship-1.png","ship-2.png","ship-1.png","ship-2.png");
+  //shipImg1 = loadAnimation("ship-1","ship-2","ship-1","ship-2");
+  
+  seaImg = loadImage("sea.png");
 }
 
-function draw() {
+function setup(){
+  createCanvas(400,400);
+  background("blue");
 
-  background(100,200,50);
-  drawSprites();
+  // Mover el fondo
+  sea=createSprite(400,200);
+  sea.addImage(seaImg);
+  sea.velocityX = -5;
+  sea.scale=0.3;
+
+  
+  ship = createSprite(130,200,30,30);
+  ship.addAnimation("movingShip",shipImg1, shipImg2);
+  ship.scale =0.25;
   
 }
 
+function draw() {
+  background(0);
+  sea.velocityX = -3;
+
+  //descomentar el código para reiniciar el fondo
+  if(sea.x < 0){
+    //sea.x = 0;
+    //sea.x = sea.width;
+    sea.x = sea.width/8;
+    //sea.y = height;
+  }
+
+ 
+  drawSprites();
+}
